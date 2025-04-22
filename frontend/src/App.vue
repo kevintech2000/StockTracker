@@ -414,20 +414,29 @@ onMounted(() => {
         <div v-for="(list, groupName) in savedStocks" :key="groupName" class="stock-group">
           <h3>{{ groupName }} ({{ list.length }})</h3>
           <draggable
-            :list="list"
+            :list="list" <!-- 或者您的靜態測試列表 -->
             item-key="code"
-            group="stocks"
-            ghost-class="ghost"
-            @end="handleDragEnd"
+            group="stocks" <!-- 或者 "test" -->
+            tag="div"
             class="draggable-list"
-            :data-group-name="groupName"
-			tag="div"
+            <!-- 暫時還是註解掉事件和 ghost-class -->
+            <!-- ghost-class="ghost" -->
+            <!-- @end="handleDragEnd" -->
+            <!-- :data-group-name="groupName" -->
            >
+            <!-- 提供空的 header 插槽 -->
+            <template #header></template>
+
+            <!-- 您的 #item 插槽 (可以使用極簡版本) -->
             <template #item="{ element }">
-              <!-- 只渲染一個最簡單的 div，包含股票代號 -->
               <div>{{ element.code }} - {{ element.name }}</div>
             </template>
+
+            <!-- 提供空的 footer 插槽 -->
+            <template #footer></template>
+
           </draggable>
+          <!-- ... -->
         </div>
       </div>
     </div>
